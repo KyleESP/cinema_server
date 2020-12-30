@@ -6,5 +6,5 @@ import polytech.cinema_server.model.Figure;
 import polytech.cinema_server.model.FigurePK;
 
 @Repository
-public interface CharacterRepository extends JpaRepository<Figure, FigurePK> {
+public interface FigureRepository extends JpaRepository<Figure, FigurePK> {
 }
