@@ -1,20 +1,27 @@
 package polytech.cinema_server.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import polytech.cinema_server.model.Actor;
-import polytech.cinema_server.repository.ActorRepository;
+import polytech.cinema_server.service.ActorService;
 
 @RestController
 @RequestMapping("/actor")
 public class ActorController {
 
+    private final ActorService actorService;
+
     @Autowired
-    private ActorRepository actorRepository;
+    public ActorController(ActorService actorService) {
+        this.actorService = actorService;
+    }
 
     @GetMapping("/{id}")
-    Actor findByIdActor(@PathVariable("id") Integer number) {
-        return null;
+    ResponseEntity<Actor> findByIdActor(@PathVariable("id") Integer id) {
+        Actor actor = actorService.findByIdActor(id);
+        return new ResponseEntity<>(actor, HttpStatus.OK);
     }
 }
 
