@@ -1,5 +1,6 @@
 package polytech.cinema_server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -95,6 +96,7 @@ public class Movie {
         this.revenueAmount = revenueAmount;
     }
 
+    @JsonIgnoreProperties(value = { "movies" })
     public Director getDirector() {
         return director;
     }
@@ -103,6 +105,7 @@ public class Movie {
         this.director = director;
     }
 
+    @JsonIgnoreProperties(value = { "movies" })
     public Category getCategory() {
         return category;
     }

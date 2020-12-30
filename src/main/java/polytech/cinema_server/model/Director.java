@@ -1,6 +1,7 @@
 package polytech.cinema_server.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -26,7 +27,6 @@ public class Director {
     private String firstName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="director", orphanRemoval = true)
-    @JsonIgnore
     private Set<Movie> movies;
 
     public Integer getId() {
@@ -53,12 +53,11 @@ public class Director {
         this.firstName = firstName;
     }
 
-    @JsonIgnore
+    @JsonIgnoreProperties(value = { "director" })
     public Set<Movie> getMovies() {
         return movies;
     }
 
-    @JsonProperty
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
