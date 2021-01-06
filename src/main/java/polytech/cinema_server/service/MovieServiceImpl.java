@@ -7,6 +7,7 @@ import polytech.cinema_server.model.Movie;
 import polytech.cinema_server.repository.MovieRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,7 +30,12 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Set<Movie> findCategoriesByIdMovie(String categoryId) throws EntityNotFoundException {
+    public List<Movie> findAllMovie() {
+        return movieRepository.findAll();
+    }
+
+    @Override
+    public Set<Movie> findMoviesByCategoryIdMovie(String categoryId) throws EntityNotFoundException {
         Category category = categoryService.findByIdCategory(categoryId);
         return category.getMovies();
     }
