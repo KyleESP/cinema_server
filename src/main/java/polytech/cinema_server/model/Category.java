@@ -1,6 +1,8 @@
 package polytech.cinema_server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
@@ -50,11 +52,12 @@ public class Category {
         this.image = image;
     }
 
-    @JsonIgnoreProperties(value = { "category" })
+    @JsonIgnore
     public Set<Movie> getMovies() {
         return movies;
     }
 
+    @JsonProperty
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
