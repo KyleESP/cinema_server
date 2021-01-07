@@ -34,8 +34,14 @@ public class MovieController {
     }
 
     @GetMapping("/by-category")
-    ResponseEntity<Set<Movie>> findMoviesByCategoryIdMovie(@RequestParam("categoryId") String categoryId) {
-        Set<Movie> movies = movieService.findMoviesByCategoryIdMovie(categoryId);
+    ResponseEntity<Set<Movie>> findByCategoryIdMovie(@RequestParam("categoryId") String categoryId) {
+        Set<Movie> movies = movieService.findByCategoryIdMovie(categoryId);
+        return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-term")
+    ResponseEntity<Set<Movie>> findByTermMovie(@RequestParam("term") String term) {
+        Set<Movie> movies = movieService.findByTermMovie(term);
         return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 }

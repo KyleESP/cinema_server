@@ -12,5 +12,7 @@ public interface MovieService {
 
     List<Movie> findAllMovie();
 
-    Set<Movie> findMoviesByCategoryIdMovie(String categoryId) throws EntityNotFoundException;
+    Set<Movie> findByCategoryIdMovie(String categoryId) throws EntityNotFoundException;
+
+    Set<Movie> findByTermMovie(String term);
 }

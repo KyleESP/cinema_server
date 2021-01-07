@@ -35,8 +35,13 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Set<Movie> findMoviesByCategoryIdMovie(String categoryId) throws EntityNotFoundException {
+    public Set<Movie> findByCategoryIdMovie(String categoryId) throws EntityNotFoundException {
         Category category = categoryService.findByIdCategory(categoryId);
         return category.getMovies();
+    }
+
+    @Override
+    public Set<Movie> findByTermMovie(String term) {
+        return movieRepository.findByTerm(term);
     }
 }
