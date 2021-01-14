@@ -20,7 +20,7 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public Actor findByIdActor(Integer id) throws EntityNotFoundException {
         return actorRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Actor with id " + id + " not found")
+                () -> new EntityNotFoundException("Actor with id " + id + " not found.")
         );
     }
 }

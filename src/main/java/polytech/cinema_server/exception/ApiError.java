@@ -3,42 +3,39 @@ package polytech.cinema_server.exception;
 import org.springframework.http.HttpStatus;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ApiError {
 
     private int status;
     private HttpStatus error;
     private Timestamp timestamp;
-    private String message;
-    private String debugMessage;
+    private List<Error> errors;
 
-    private ApiError(HttpStatus status) {
+    ApiError(HttpStatus status) {
+        errors = new ArrayList<>();
         this.status = status.value();
         this.error = status;
         timestamp = new Timestamp(System.currentTimeMillis());
     }
 
-    ApiError(Throwable e) {
-        this(HttpStatus.INTERNAL_SERVER_ERROR);
-        this.message = e.getMessage();
-        this.debugMessage = e.getLocalizedMessage();
+    ApiError(HttpStatus status, Error err) {
+        this(status);
+        errors.add(err);
     }
 
-    ApiError(HttpStatus status, Throwable e) {
+    ApiError(HttpStatus status, List<Error> errors) {
         this(status);
-        this.message = e.getMessage();
-        this.debugMessage = e.getLocalizedMessage();
+        this.errors = errors;
     }
 
-    ApiError(HttpStatus status, String message) {
-        this(status);
-        this.message = message;
+    ApiError(HttpStatus status, String code, String message, String debugMessage) {
+        this(status, new Error(code, message, debugMessage));
     }
 
-    ApiError(HttpStatus status, String message, String debugMessage) {
-        this(status);
-        this.message = message;
-        this.debugMessage = debugMessage;
+    ApiError(HttpStatus status, Throwable t) {
+        this(status, new Error(t));
     }
 
     public int getStatus() {
@@ -65,19 +62,11 @@ public class ApiError {
         this.timestamp = timestamp;
     }
 
-    public String getMessage() {
-        return message;
+    public List<Error> getErrors() {
+        return errors;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getDebugMessage() {
-        return debugMessage;
-    }
-
-    public void setDebugMessage(String debugMessage) {
-        this.debugMessage = debugMessage;
+    public void setErrors(List<Error> errors) {
+        this.errors = errors;
     }
 }

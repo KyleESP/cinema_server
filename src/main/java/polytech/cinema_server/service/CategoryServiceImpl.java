@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findByIdCategory(String id) throws EntityNotFoundException {
         return categoryRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Category with code " + id + " not found")
+                () -> new EntityNotFoundException("Category with code " + id + " not found.")
         );
     }
 

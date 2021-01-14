@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import polytech.cinema_server.model.User;
 import polytech.cinema_server.service.UserService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -25,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    ResponseEntity<User> findByEmailAndPasswordUser(@RequestBody User user) {
+    ResponseEntity<User> findByEmailAndPasswordUser(@Valid @RequestBody User user) {
         User userFound = userService.findByEmailAndPasswordUser(user.getEmail(), user.getPassword());
         return new ResponseEntity<>(userFound, HttpStatus.OK);
     }

@@ -2,18 +2,15 @@ package polytech.cinema_server.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class CustomException extends RuntimeException {
+public class ApiException extends RuntimeException {
 
     private HttpStatus status;
+    private String code;
 
-    public CustomException(HttpStatus status, String message) {
+    public ApiException(HttpStatus status, String code, String message) {
         super(message);
         this.status = status;
-    }
-
-    public CustomException(HttpStatus status, String message, Throwable cause) {
-        super(message, cause);
-        this.status = status;
+        this.code = code;
     }
 
     public HttpStatus getStatus() {
@@ -22,5 +19,13 @@ public class CustomException extends RuntimeException {
 
     public void setStatus(HttpStatus status) {
         this.status = status;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

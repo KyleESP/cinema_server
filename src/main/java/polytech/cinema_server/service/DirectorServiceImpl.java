@@ -20,7 +20,7 @@ public class DirectorServiceImpl implements DirectorService {
     @Override
     public Director findByIdDirector(Integer id) throws EntityNotFoundException {
         return directorRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Director with id " + id + " not found")
+                () -> new EntityNotFoundException("Director with id " + id + " not found.")
         );
     }
 }

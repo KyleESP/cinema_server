@@ -3,8 +3,10 @@ package polytech.cinema_server.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import polytech.cinema_server.validator.ValidPassword;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @JsonSerialize(as = User.class)
@@ -18,10 +20,12 @@ public class User {
 
     @Basic
     @Column(nullable = false, unique = true, name = "email")
+    @Email(message = "Email should be valid.")
     private String email;
 
     @Basic
     @Column(nullable = false, name = "password")
+    @ValidPassword
     private String password;
 
     public Integer getId() {
