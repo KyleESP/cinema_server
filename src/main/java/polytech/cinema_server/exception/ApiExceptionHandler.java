@@ -20,7 +20,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException e) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<Error> errors = new ArrayList<>();
         e.getBindingResult().getAllErrors().forEach((error) -> {
             Error err = new Error(error.getCode(), error.getDefaultMessage());
@@ -31,7 +31,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(ApiException.class)
-    protected ResponseEntity<Object> handleCustomException(ApiException e) {
+    protected ResponseEntity<Object> handleApiException(ApiException e) {
         Throwable t = e.getCause() != null ? e.getCause() : e;
         ApiError apiError = new ApiError(e.getStatus(), e.getCode(), e.getMessage(), t.getLocalizedMessage());
         return buildResponseEntity(apiError);
