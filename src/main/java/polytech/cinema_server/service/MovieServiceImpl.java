@@ -66,8 +66,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void deleteByIdMovie(Integer id) throws EntityNotFoundException {
-        Movie movie = findByIdMovie(id);
-        movieRepository.deleteById(movie.getId());
+    public void deleteByIdMovie(Integer id) {
+        movieRepository.deleteById(id);
     }
 }

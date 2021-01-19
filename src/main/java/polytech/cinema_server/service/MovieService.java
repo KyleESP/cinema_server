@@ -20,5 +20,5 @@ public interface MovieService {
 
     Movie updateByIdMovie(Integer id, Movie movieDetails) throws EntityNotFoundException;
 
-    void deleteByIdMovie(Integer id) throws EntityNotFoundException;
+    void deleteByIdMovie(Integer id);
 }
