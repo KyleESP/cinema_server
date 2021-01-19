@@ -8,6 +8,8 @@ import java.util.Set;
 
 public interface MovieService {
 
+    Movie saveMovie(Movie movie);
+
     Movie findByIdMovie(Integer id) throws EntityNotFoundException;
 
     List<Movie> findAllMovie();
@@ -15,4 +17,8 @@ public interface MovieService {
     Set<Movie> findByCategoryIdMovie(String categoryId) throws EntityNotFoundException;
 
     Set<Movie> findByTermMovie(String term);
+
+    Movie updateByIdMovie(Integer id, Movie movieDetails) throws EntityNotFoundException;
+
+    void deleteByIdMovie(Integer id) throws EntityNotFoundException;
 }

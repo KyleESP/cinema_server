@@ -18,6 +18,12 @@ public class ActorController {
         this.actorService = actorService;
     }
 
+    @PostMapping("")
+    ResponseEntity<Actor> saveActor(@RequestBody Actor actor) {
+        Actor actorSaved = actorService.saveActor(actor);
+        return new ResponseEntity<>(actorSaved, HttpStatus.CREATED);
+    }
+    
     @GetMapping("/{id}")
     ResponseEntity<Actor> findByIdActor(@PathVariable("id") Integer id) {
         Actor actor = actorService.findByIdActor(id);

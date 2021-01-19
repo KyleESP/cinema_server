@@ -23,6 +23,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
+    public Movie saveMovie(Movie movie) {
+        return movieRepository.save(movie);
+    }
+
+    @Override
     public Movie findByIdMovie(Integer id) throws EntityNotFoundException {
         return movieRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Movie with id " + id + " not found.")
@@ -43,5 +48,26 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Set<Movie> findByTermMovie(String term) {
         return movieRepository.findByTerm(term);
+    }
+
+    @Override
+    public Movie updateByIdMovie(Integer id, Movie movieDetails) throws EntityNotFoundException {
+        Movie movie = findByIdMovie(id);
+
+        movie.setTitle(movieDetails.getTitle());
+        movie.setDuration(movieDetails.getDuration());
+        movie.setReleaseDate(movieDetails.getReleaseDate());
+        movie.setBudget(movieDetails.getBudget());
+        movie.setRevenueAmount(movieDetails.getRevenueAmount());
+        movie.setDirector(movieDetails.getDirector());
+        movie.setCategory(movieDetails.getCategory());
+
+        return movieRepository.save(movie);
+    }
+
+    @Override
+    public void deleteByIdMovie(Integer id) throws EntityNotFoundException {
+        Movie movie = findByIdMovie(id);
+        movieRepository.deleteById(movie.getId());
     }
 }

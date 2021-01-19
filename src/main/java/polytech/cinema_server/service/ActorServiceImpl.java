@@ -18,6 +18,11 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
+    public Actor saveActor(Actor actor) {
+        return actorRepository.save(actor);
+    }
+    
+    @Override
     public Actor findByIdActor(Integer id) throws EntityNotFoundException {
         return actorRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Actor with id " + id + " not found.")

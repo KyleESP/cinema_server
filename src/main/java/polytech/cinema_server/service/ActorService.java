@@ -6,5 +6,7 @@ import javax.persistence.EntityNotFoundException;
 
 public interface ActorService {
 
+    Actor saveActor(Actor actor);
+
     Actor findByIdActor(Integer id) throws EntityNotFoundException;
 }

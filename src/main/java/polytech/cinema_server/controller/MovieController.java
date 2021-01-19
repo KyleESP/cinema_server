@@ -21,6 +21,12 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    @PostMapping("")
+    ResponseEntity<Movie> saveMovie(@RequestBody Movie movie) {
+        Movie movieSaved = movieService.saveMovie(movie);
+        return new ResponseEntity<>(movieSaved, HttpStatus.CREATED);
+    }
+
     @GetMapping("")
     ResponseEntity<List<Movie>> findAllMovie() {
         List<Movie> movies = movieService.findAllMovie();
@@ -43,6 +49,17 @@ public class MovieController {
     ResponseEntity<Set<Movie>> findByTermMovie(@RequestParam("term") String term) {
         Set<Movie> movies = movieService.findByTermMovie(term);
         return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    ResponseEntity<Movie> updateByIdMovie(@PathVariable("id") Integer id, @RequestBody Movie movieDetails) {
+        Movie movieUpdated = movieService.updateByIdMovie(id, movieDetails);
+        return new ResponseEntity<>(movieUpdated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    void updateByIdMovie(@PathVariable("id") Integer id) {
+        movieService.deleteByIdMovie(id);
     }
 }
 
