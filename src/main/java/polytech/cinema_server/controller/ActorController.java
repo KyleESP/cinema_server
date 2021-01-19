@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import polytech.cinema_server.model.Actor;
 import polytech.cinema_server.service.ActorService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/actor")
 public class ActorController {
@@ -28,6 +30,12 @@ public class ActorController {
     ResponseEntity<Actor> findByIdActor(@PathVariable("id") Integer id) {
         Actor actor = actorService.findByIdActor(id);
         return new ResponseEntity<>(actor, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    ResponseEntity<List<Actor>> findAllActor() {
+        List<Actor> actors = actorService.findAllActor();
+        return new ResponseEntity<>(actors, HttpStatus.OK);
     }
 }
 

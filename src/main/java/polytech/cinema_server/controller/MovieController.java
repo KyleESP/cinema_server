@@ -27,16 +27,16 @@ public class MovieController {
         return new ResponseEntity<>(movieSaved, HttpStatus.CREATED);
     }
 
-    @GetMapping("")
-    ResponseEntity<List<Movie>> findAllMovie() {
-        List<Movie> movies = movieService.findAllMovie();
-        return new ResponseEntity<>(movies, HttpStatus.OK);
-    }
-
     @GetMapping("/{id}")
     ResponseEntity<Movie> findByIdMovie(@PathVariable("id") Integer id) {
         Movie movie = movieService.findByIdMovie(id);
         return new ResponseEntity<>(movie, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    ResponseEntity<List<Movie>> findAllMovie() {
+        List<Movie> movies = movieService.findAllMovie();
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 
     @GetMapping("/by-category")

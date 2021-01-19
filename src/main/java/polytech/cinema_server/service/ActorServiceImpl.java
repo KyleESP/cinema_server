@@ -6,6 +6,7 @@ import polytech.cinema_server.model.Actor;
 import polytech.cinema_server.repository.ActorRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class ActorServiceImpl implements ActorService {
@@ -27,5 +28,10 @@ public class ActorServiceImpl implements ActorService {
         return actorRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Actor with id " + id + " not found.")
         );
+    }
+
+    @Override
+    public List<Actor> findAllActor() {
+        return actorRepository.findAll();
     }
 }
