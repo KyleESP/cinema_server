@@ -1,12 +1,13 @@
 package polytech.cinema_server.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @JsonSerialize(as = Movie.class)
@@ -47,6 +48,9 @@ public class Movie {
     @JoinColumn(name = "category_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="movie", orphanRemoval = true)
+    private Set<Figure> figures;
 
     public Integer getId() {
         return id;
@@ -112,5 +116,14 @@ public class Movie {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @JsonIgnoreProperties(value = { "movie" })
+    public Set<Figure> getFigures() {
+        return figures;
+    }
+
+    public void setFigures(Set<Figure> figures) {
+        this.figures = figures;
     }
 }

@@ -1,31 +1,33 @@
 package polytech.cinema_server.model;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class FigurePK implements Serializable {
 
-    @Column(nullable = false, name = "actor_id", length = 4)
-    private Integer actorId;
+    private Integer actor;
 
-    @Column(nullable = false, name = "movie_id", length = 4)
-    private Integer movieId;
+    private Integer movie;
 
-    public Integer getActorId() {
-        return actorId;
+    public FigurePK(Integer actorId, Integer movieId) {
+        this.actor = actorId;
+        this.movie = movieId;
     }
 
-    public void setActorId(Integer actorId) {
-        this.actorId = actorId;
+    public Integer getActor() {
+        return actor;
     }
 
-    public Integer getMovieId() {
-        return movieId;
+    public void setActor(Integer actor) {
+        this.actor = actor;
     }
 
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
+    public Integer getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Integer movie) {
+        this.movie = movie;
     }
 
     @Override
@@ -33,11 +35,11 @@ public class FigurePK implements Serializable {
         if (this == o) return true;
         if (!(o instanceof FigurePK)) return false;
         FigurePK figurePK = (FigurePK) o;
-        return actorId.equals(figurePK.actorId) && movieId.equals(figurePK.movieId);
+        return actor.equals(figurePK.actor) && movie.equals(figurePK.movie);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(actorId, movieId);
+        return Objects.hash(actor, movie);
     }
 }

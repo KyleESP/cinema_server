@@ -38,8 +38,9 @@ public class FigureController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteByIdFigure(@PathVariable("id") FigurePK id) {
-        figureService.deleteByIdFigure(id);
+    ResponseEntity<Figure> deleteByIdFigure(@PathVariable("id") FigurePK id) {
+        Figure figureDeleted = figureService.deleteByIdFigure(id);
+        return new ResponseEntity<>(figureDeleted, HttpStatus.OK);
     }
 }
 

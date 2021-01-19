@@ -1,9 +1,11 @@
 package polytech.cinema_server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @JsonSerialize(as = Actor.class)
@@ -30,6 +32,9 @@ public class Actor {
     @Basic
     @Column(name = "deathday_date", columnDefinition = "date DEFAULT NULL")
     private Date deathdayDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="actor", orphanRemoval = true)
+    private Set<Figure> figures;
 
     public Integer getId() {
         return id;
@@ -69,5 +74,14 @@ public class Actor {
 
     public void setDeathdayDate(Date deathdayDate) {
         this.deathdayDate = deathdayDate;
+    }
+
+    @JsonIgnoreProperties(value = { "actor" })
+    public Set<Figure> getFigures() {
+        return figures;
+    }
+
+    public void setFigures(Set<Figure> figures) {
+        this.figures = figures;
     }
 }

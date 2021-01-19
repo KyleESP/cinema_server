@@ -8,6 +8,7 @@ import polytech.cinema_server.model.Actor;
 import polytech.cinema_server.service.ActorService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/actor")
@@ -30,6 +31,12 @@ public class ActorController {
     ResponseEntity<Actor> findByIdActor(@PathVariable("id") Integer id) {
         Actor actor = actorService.findByIdActor(id);
         return new ResponseEntity<>(actor, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-term")
+    ResponseEntity<Set<Actor>> findByTermActor(@RequestParam("term") String term) {
+        Set<Actor> actors = actorService.findByTermActor(term);
+        return new ResponseEntity<>(actors, HttpStatus.OK);
     }
 
     @GetMapping("")

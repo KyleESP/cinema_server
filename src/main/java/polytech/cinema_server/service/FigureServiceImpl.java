@@ -34,8 +34,8 @@ public class FigureServiceImpl implements FigureService {
     public Figure updateByIdFigure(FigurePK id, Figure figureDetails) throws EntityNotFoundException {
         Figure figure = findByIdFigure(id);
 
-        figure.setActorId(figureDetails.getActorId());
-        figure.setMovieId(figureDetails.getMovieId());
+        figure.setActor(figureDetails.getActor());
+        figure.setMovie(figureDetails.getMovie());
         figure.setName(figureDetails.getName());
 
         return figureRepository.save(figure);

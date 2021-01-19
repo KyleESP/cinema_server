@@ -1,5 +1,6 @@
 package polytech.cinema_server.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
@@ -11,31 +12,35 @@ import javax.persistence.*;
 public class Figure {
 
     @Id
-    @Column(name = "actor_id")
-    private Integer actorId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "actor_id")
+    private Actor actor;
 
     @Id
-    @Column(name = "movie_id")
-    private Integer movieId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
     @Basic
     @Column(nullable = false, name = "name", length = 30)
     private String name;
 
-    public Integer getActorId() {
-        return actorId;
+    @JsonIgnoreProperties(value = { "figures" })
+    public Actor getActor() {
+        return actor;
     }
 
-    public void setActorId(Integer actorId) {
-        this.actorId = actorId;
+    public void setActor(Actor actor) {
+        this.actor = actor;
     }
 
-    public Integer getMovieId() {
-        return movieId;
+    @JsonIgnoreProperties(value = { "figures" })
+    public Movie getMovie() {
+        return movie;
     }
 
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
     public String getName() {
