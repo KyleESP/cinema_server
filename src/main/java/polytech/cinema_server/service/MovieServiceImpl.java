@@ -66,7 +66,9 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void deleteByIdMovie(Integer id) {
+    public Movie deleteByIdMovie(Integer id) {
+        Movie movie = findByIdMovie(id);
         movieRepository.deleteById(id);
+        return movie;
     }
 }

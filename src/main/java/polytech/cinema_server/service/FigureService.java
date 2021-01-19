@@ -12,5 +12,5 @@ public interface FigureService {
 
     Figure updateByIdFigure(FigurePK id, Figure figureDetails) throws EntityNotFoundException;
 
-    void deleteByIdFigure(FigurePK id);
+    Figure deleteByIdFigure(FigurePK id);
 }

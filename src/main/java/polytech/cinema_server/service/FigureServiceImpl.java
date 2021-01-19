@@ -42,7 +42,9 @@ public class FigureServiceImpl implements FigureService {
     }
 
     @Override
-    public void deleteByIdFigure(FigurePK id) throws EntityNotFoundException {
+    public Figure deleteByIdFigure(FigurePK id) throws EntityNotFoundException {
+        Figure figure = findByIdFigure(id);
         figureRepository.deleteById(id);
+        return figure;
     }
 }
