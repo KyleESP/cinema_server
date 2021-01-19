@@ -33,15 +33,15 @@ public class ActorController {
         return new ResponseEntity<>(actor, HttpStatus.OK);
     }
 
-    @GetMapping("/by-term")
-    ResponseEntity<Set<Actor>> findByTermActor(@RequestParam("term") String term) {
-        Set<Actor> actors = actorService.findByTermActor(term);
-        return new ResponseEntity<>(actors, HttpStatus.OK);
-    }
-
     @GetMapping("")
     ResponseEntity<List<Actor>> findAllActor() {
         List<Actor> actors = actorService.findAllActor();
+        return new ResponseEntity<>(actors, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-term")
+    ResponseEntity<Set<Actor>> findByTermActor(@RequestParam("term") String term) {
+        Set<Actor> actors = actorService.findByTermActor(term);
         return new ResponseEntity<>(actors, HttpStatus.OK);
     }
 }

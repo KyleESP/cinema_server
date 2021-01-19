@@ -9,11 +9,6 @@ public class FigurePK implements Serializable {
 
     private Integer movie;
 
-    public FigurePK(Integer actorId, Integer movieId) {
-        this.actor = actorId;
-        this.movie = movieId;
-    }
-
     public Integer getActor() {
         return actor;
     }
