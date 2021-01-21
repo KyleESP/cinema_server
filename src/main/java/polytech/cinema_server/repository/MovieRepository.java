@@ -10,7 +10,13 @@ import java.util.Set;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
-    @Query("SELECT m FROM Movie m WHERE CONCAT(m.title, m.releaseDate, m.category.wording, " +
-            "m.director.firstName, m.director.lastName) LIKE %?1%")
+    @Query("SELECT m FROM Movie m WHERE CONCAT(" +
+            "m.title, ' ', " +
+            "m.releaseDate, ' ', " +
+            "m.category.wording, ' ', " +
+            "m.director.lastName, ' ', " +
+            "m.director.firstName, ' ', " +
+            "m.director.lastName" +
+            ") LIKE %?1%")
     Set<Movie> findByTerm(String term);
 }
