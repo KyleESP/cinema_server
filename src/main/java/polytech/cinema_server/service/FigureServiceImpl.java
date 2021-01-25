@@ -7,6 +7,7 @@ import polytech.cinema_server.model.FigurePK;
 import polytech.cinema_server.repository.FigureRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class FigureServiceImpl implements FigureService {
@@ -21,6 +22,11 @@ public class FigureServiceImpl implements FigureService {
     @Override
     public Figure saveFigure(Figure figure) {
         return figureRepository.save(figure);
+    }
+
+    @Override
+    public List<Figure> getAll() {
+        return figureRepository.findAll();
     }
 
     @Override

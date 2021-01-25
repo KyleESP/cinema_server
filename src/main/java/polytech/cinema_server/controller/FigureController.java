@@ -8,6 +8,8 @@ import polytech.cinema_server.model.Figure;
 import polytech.cinema_server.model.FigurePK;
 import polytech.cinema_server.service.FigureService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/figure")
 public class FigureController {
@@ -23,6 +25,12 @@ public class FigureController {
     ResponseEntity<Figure> saveFigure(@RequestBody Figure figure) {
         Figure figureSaved = figureService.saveFigure(figure);
         return new ResponseEntity<>(figureSaved, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    ResponseEntity<List<Figure>> getFigure() {
+        List<Figure> figures = figureService.getAll();
+        return new ResponseEntity<>(figures, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
