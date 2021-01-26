@@ -8,6 +8,8 @@ import polytech.cinema_server.model.Figure;
 import polytech.cinema_server.model.FigurePK;
 import polytech.cinema_server.service.FigureService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/figure")
 public class FigureController {
@@ -25,20 +27,26 @@ public class FigureController {
         return new ResponseEntity<>(figureSaved, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    ResponseEntity<Figure> findByIdFigure(@PathVariable("id") FigurePK id) {
+    @GetMapping
+    ResponseEntity<List<Figure>> getFigure() {
+        List<Figure> figures = figureService.getAll();
+        return new ResponseEntity<>(figures, HttpStatus.OK);
+    }
+
+    @GetMapping("/{actor}/{movie}")
+    ResponseEntity<Figure> findByIdFigure(FigurePK id) {
         Figure figure = figureService.findByIdFigure(id);
         return new ResponseEntity<>(figure, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    ResponseEntity<Figure> updateByIdFigure(@PathVariable("id") FigurePK id, @RequestBody Figure figureDetails) {
+    @PutMapping("/{actor}/{movie}")
+    ResponseEntity<Figure> updateByIdFigure(FigurePK id, @RequestBody Figure figureDetails) {
         Figure figureUpdated = figureService.updateByIdFigure(id, figureDetails);
         return new ResponseEntity<>(figureUpdated, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    ResponseEntity<Figure> deleteByIdFigure(@PathVariable("id") FigurePK id) {
+    @DeleteMapping("/{actor}/{movie}")
+    ResponseEntity<Figure> deleteByIdFigure(FigurePK id) {
         Figure figureDeleted = figureService.deleteByIdFigure(id);
         return new ResponseEntity<>(figureDeleted, HttpStatus.OK);
     }

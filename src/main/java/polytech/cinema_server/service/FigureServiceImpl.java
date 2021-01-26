@@ -7,6 +7,7 @@ import polytech.cinema_server.model.FigurePK;
 import polytech.cinema_server.repository.FigureRepository;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class FigureServiceImpl implements FigureService {
@@ -24,6 +25,11 @@ public class FigureServiceImpl implements FigureService {
     }
 
     @Override
+    public List<Figure> getAll() {
+        return figureRepository.findAll();
+    }
+
+    @Override
     public Figure findByIdFigure(FigurePK id) throws EntityNotFoundException {
         return figureRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Figure with id " + id + " not found.")
@@ -33,6 +39,7 @@ public class FigureServiceImpl implements FigureService {
     @Override
     public Figure updateByIdFigure(FigurePK id, Figure figureDetails) throws EntityNotFoundException {
         Figure figure = findByIdFigure(id);
+        this.deleteByIdFigure(id);
 
         figure.setActor(figureDetails.getActor());
         figure.setMovie(figureDetails.getMovie());
