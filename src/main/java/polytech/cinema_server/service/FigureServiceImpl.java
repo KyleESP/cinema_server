@@ -39,6 +39,7 @@ public class FigureServiceImpl implements FigureService {
     @Override
     public Figure updateByIdFigure(FigurePK id, Figure figureDetails) throws EntityNotFoundException {
         Figure figure = findByIdFigure(id);
+        this.deleteByIdFigure(id);
 
         figure.setActor(figureDetails.getActor());
         figure.setMovie(figureDetails.getMovie());
